@@ -3,7 +3,6 @@
 #  Dataset : Social_Network_Ads (created manually - same structure)
 #  Goal    : Predict if a user Purchased (1) or Not Purchased (0)
 # ============================================================
-
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
