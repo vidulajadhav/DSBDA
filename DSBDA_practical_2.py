@@ -2,7 +2,6 @@
 #  DATA SCIENCE PRACTICAL - Academic Performance Dataset
 #  Dataset : Created manually (realistic student data)
 # ============================================================
-
 # ── Q1. Import Libraries ────────────────────────────────────
 import pandas as pd
 import numpy as np
