@@ -6,7 +6,6 @@
 
 import pandas as pd
 import numpy as np
-
 # ════════════════════════════════════════════════════════════
 # PART 1 — Summary Statistics Grouped by Categorical Variable
 # Dataset : Student Academic Performance (created manually)
