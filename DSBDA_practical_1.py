@@ -1,7 +1,7 @@
 # ============================================================
 #  DATA SCIENCE PRACTICAL EXAMINATION
 #  Dataset : Titanic
-#  Source  : https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv
+#  File    : titanic.csv
 # ============================================================
 
 
@@ -13,17 +13,16 @@ from sklearn.preprocessing import MinMaxScaler
 
 # ── Q2. Dataset Description ─────────────────────────────────
 # Name   : Titanic Passenger Dataset
-# URL    : https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv
-# About  : Records of 891 Titanic passengers.
+# File   : titanic.csv
+# About  : Records of Titanic passengers.
 #          Contains survival status, passenger class, name, sex, age,
 #          number of siblings/spouses, parents/children aboard, ticket,
 #          fare, cabin, and port of embarkation.
 
-URL = "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
-
 
 # ── Q3. Load Dataset ────────────────────────────────────────
-df = pd.read_csv(URL)
+df = pd.read_csv("Titanic-Dataset.csv")
+
 print("=== First 5 Rows ===")
 print(df.head())
 
@@ -49,13 +48,14 @@ print(df.shape)
 
 
 # ── Q5. Data Formatting & Normalization ─────────────────────
-# FIX: Direct assignment instead of inplace=True (pandas 2.0 Copy-on-Write fix)
+# FIX: Direct assignment instead of inplace=True
 df["Age"]      = df["Age"].fillna(df["Age"].median())
 df["Embarked"] = df["Embarked"].fillna(df["Embarked"].mode()[0])
 df.drop(columns=["Cabin", "Name", "Ticket", "PassengerId"], inplace=True)
 
 print("\n=== Data Types After Cleaning ===")
 print(df.dtypes)
+
 # object  -> Sex, Embarked  (categorical / character)
 # float64 -> Age, Fare      (continuous numeric)
 # int64   -> Survived, Pclass, SibSp, Parch (integer)
@@ -63,6 +63,7 @@ print(df.dtypes)
 # Min-Max Normalization: scales Age and Fare to 0-1 range
 scaler = MinMaxScaler()
 df[["Age", "Fare"]] = scaler.fit_transform(df[["Age", "Fare"]])
+
 print("\n=== After Min-Max Normalization (Age & Fare) ===")
 print(df[["Age", "Fare"]].head())
 
@@ -76,6 +77,8 @@ df = pd.get_dummies(df, columns=["Embarked"], drop_first=True)
 
 print("\n=== Final DataFrame (Categorical Encoded) ===")
 print(df.head())
+
 print("\n=== Final Data Types ===")
 print(df.dtypes)
+
 print("\n=== Final Shape ===", df.shape)
