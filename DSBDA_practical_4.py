@@ -16,7 +16,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 # ── Load Boston Housing Dataset ─────────────────────────────
-boston = fetch_openml(name="boston", version=1, as_frame=True, parser="auto")
+boston = fetch_openml(name="boston", version=1, as_frame=True, parser="auto")  #df = pd.read_csv("boston.csv")
 df = boston.frame
 
 # Rename target column for clarity
