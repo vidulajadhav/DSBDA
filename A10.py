@@ -1,14 +1,10 @@
-# ============================================================
-#  PRACTICAL 10 — Data Visualization : Iris Dataset
-#  USING sklearn Iris Dataset (NO INTERNET REQUIRED)
+#  PRACTICAL 10 — Data Visualization : Iris Dataset USING sklearn Iris Dataset (NO INTERNET REQUIRED)
 #  1. Feature types
 #  2. Histogram per feature
 #  3. Boxplot per feature
 #  4. Compare distributions & identify outliers
 #  + Line Chart and Scatter Plot
-# ============================================================
 
-# ── Import Libraries ────────────────────────────────────────
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -16,25 +12,22 @@ import numpy as np
 
 from sklearn.datasets import load_iris
 
-# ============================================================
-# LOAD IRIS DATASET FROM sklearn
-# ============================================================
-
+#LOAD IRIS DATASET FROM sklearn
 iris = load_iris(as_frame=True)
 
 df = iris.frame
 
-# Add species names
+#Add species names
 df["species"] = df["target"].map({
     0: "setosa",
     1: "versicolor",
     2: "virginica"
 })
 
-# Remove target column
+#Remove target column
 df.drop("target", axis=1, inplace=True)
 
-# Rename columns
+#Rename columns
 df.columns = [
     "sepal_length",
     "sepal_width",
@@ -43,19 +36,13 @@ df.columns = [
     "species"
 ]
 
-# ============================================================
-# SAVE DATASET LOCALLY AS CSV
-# ============================================================
-
+#SAVE DATASET LOCALLY AS CSV
 df.to_csv("Iris_Dataset.csv", index=False)
 
 print("Dataset saved successfully!")
 print("File Name : Iris_Dataset.csv")
 
-# ============================================================
-# DISPLAY DATASET
-# ============================================================
-
+#DISPLAY DATASET
 print("\n=== Iris Dataset ===")
 
 print("Shape:", df.shape)
@@ -71,10 +58,7 @@ features = [
     "petal_width"
 ]
 
-# ============================================================
-# FEATURE TYPES
-# ============================================================
-
+#FEATURE TYPES
 print("\n=== Feature Types ===")
 
 print("  sepal_length : Numeric (continuous)")
@@ -87,10 +71,7 @@ print("  petal_width  : Numeric (continuous)")
 
 print("  species      : Nominal (categorical)")
 
-# ════════════════════════════════════════════════════════════
-# PLOT 1 — HISTOGRAMS
-# ════════════════════════════════════════════════════════════
-
+#PLOT 1 — HISTOGRAMS
 fig, axes = plt.subplots(2, 2, figsize=(10, 7))
 
 colors = [
@@ -129,10 +110,7 @@ plt.show()
 
 print(">> Plot 1 saved: p10_histograms.png")
 
-# ════════════════════════════════════════════════════════════
-# PLOT 2 — BOX PLOTS
-# ════════════════════════════════════════════════════════════
-
+#PLOT 2 — BOX PLOTS
 fig, axes = plt.subplots(2, 2, figsize=(10, 7))
 
 for ax, feat in zip(axes.flatten(), features):
@@ -166,10 +144,7 @@ plt.show()
 
 print(">> Plot 2 saved: p10_boxplots.png")
 
-# ════════════════════════════════════════════════════════════
-# PLOT 3 — LINE CHART
-# ════════════════════════════════════════════════════════════
-
+#PLOT 3 — LINE CHART
 mean_df = df.groupby("species")[features].mean().reset_index()
 
 mean_melted = mean_df.melt(
@@ -208,10 +183,7 @@ plt.show()
 
 print(">> Plot 3 saved: p10_linechart_means.png")
 
-# ════════════════════════════════════════════════════════════
-# PLOT 4 — SCATTER PLOT
-# ════════════════════════════════════════════════════════════
-
+#PLOT 4 — SCATTER PLOT
 plt.figure(figsize=(8, 5))
 
 sns.scatterplot(
@@ -240,10 +212,7 @@ plt.show()
 
 print(">> Plot 4 saved: p10_scatter_petal.png")
 
-# ============================================================
-# OUTLIER DETECTION USING IQR
-# ============================================================
-
+#OUTLIER DETECTION USING IQR
 print("\n=== Outlier Summary (IQR Method) ===")
 
 for feat in features:
@@ -261,10 +230,7 @@ for feat in features:
 
     print(f"{feat:15s}: {len(outliers)} outlier(s)")
 
-# ============================================================
-# OBSERVATIONS
-# ============================================================
-
+#OBSERVATIONS
 # print("""
 # === Observations (Practical 10) ===
 
