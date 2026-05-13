@@ -1,10 +1,5 @@
-# ============================================================
-# DATA ANALYTICS PRACTICAL
-# LINEAR REGRESSION USING OWN DATASET
-# WITH MISSING VALUES HANDLING
-# ============================================================
+#DATA ANALYTICS PRACTICAL: LINEAR REGRESSION USING OWN DATASET WITH MISSING VALUES HANDLING
 
-# ── Import Libraries ───────────────────────────────────────
 import pandas as pd
 import numpy as np
 
@@ -13,10 +8,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.preprocessing import StandardScaler
 
-# ============================================================
-# CREATE OWN DATASET
-# ============================================================
-
+#CREATE OWN DATASET
 data = {
 
     "RM": [
@@ -62,24 +54,15 @@ data = {
     ]
 }
 
-# ============================================================
-# CONVERT INTO DATAFRAME
-# ============================================================
-
+#CONVERT INTO DATAFRAME
 df = pd.DataFrame(data)
 
-# ============================================================
-# SAVE DATASET LOCALLY
-# ============================================================
-
+#SAVE DATASET LOCALLY
 df.to_csv("boston.csv", index=False)
 
 print("Dataset created and saved successfully!")
 
-# ============================================================
-# LOAD DATASET
-# ============================================================
-
+#LOAD DATASET
 df = pd.read_csv("boston.csv")
 
 print("\n=== Dataset Info ===")
@@ -88,48 +71,30 @@ print("Shape :", df.shape)
 print("\n=== First 5 Rows ===")
 print(df.head())
 
-# ============================================================
-# CHECK MISSING VALUES
-# ============================================================
-
+#CHECK MISSING VALUES
 print("\n=== Missing Values Before Handling ===")
 print(df.isnull().sum())
 
-# ============================================================
-# HANDLE MISSING VALUES
-# ============================================================
-
+#HANDLE MISSING VALUES
 df.fillna(df.mean(numeric_only=True), inplace=True)
 
 print("\n=== Missing Values After Handling ===")
 print(df.isnull().sum())
 
-# ============================================================
-# BASIC STATISTICS
-# ============================================================
-
+#BASIC STATISTICS
 print("\n=== Statistical Summary ===")
 print(df.describe().round(2))
 
-# ============================================================
-# SPLIT FEATURES AND TARGET
-# ============================================================
-
+#SPLIT FEATURES AND TARGET
 X = df.drop(columns=["HousePrice"])
 y = df["HousePrice"]
 
-# ============================================================
-# FEATURE SCALING
-# ============================================================
-
+#FEATURE SCALING
 scaler = StandardScaler()
 
 X_scaled = scaler.fit_transform(X)
 
-# ============================================================
-# TRAIN TEST SPLIT
-# ============================================================
-
+#TRAIN TEST SPLIT
 X_train, X_test, y_train, y_test = train_test_split(
     X_scaled,
     y,
@@ -140,18 +105,12 @@ X_train, X_test, y_train, y_test = train_test_split(
 print(f"\nTraining Samples : {X_train.shape[0]}")
 print(f"Testing Samples  : {X_test.shape[0]}")
 
-# ============================================================
-# BUILD LINEAR REGRESSION MODEL
-# ============================================================
-
+#BUILD LINEAR REGRESSION MODEL
 model = LinearRegression()
 
 model.fit(X_train, y_train)
 
-# ============================================================
-# MODEL COEFFICIENTS
-# ============================================================
-
+#MODEL COEFFICIENTS
 print("\n=== Model Coefficients ===")
 
 coeff_df = pd.DataFrame({
@@ -163,10 +122,7 @@ print(coeff_df.to_string(index=False))
 
 print(f"\nIntercept : {model.intercept_:.3f}")
 
-# ============================================================
-# PREDICTIONS
-# ============================================================
-
+#PREDICTIONS
 y_pred = model.predict(X_test)
 
 print("\n=== Actual vs Predicted ===")
@@ -179,10 +135,7 @@ comparison = pd.DataFrame({
 
 print(comparison.to_string(index=False))
 
-# ============================================================
-# MODEL EVALUATION
-# ============================================================
-
+#MODEL EVALUATION
 mse = mean_squared_error(y_test, y_pred)
 
 rmse = np.sqrt(mse)
