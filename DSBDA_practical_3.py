@@ -1,14 +1,63 @@
 # ============================================================
-# DATA SCIENCE PRACTICAL
-# PART 1 : Summary Statistics grouped by Categorical Variable
+# CREATE YOUR OWN DATASET
 # ============================================================
 
 import pandas as pd
 
-# ── Load Dataset from CSV File ──────────────────────────────
+# ── Create Dataset Manually ────────────────────────────────
+
+
+data = {
+    "Student": [
+        "Amit", "Sneha", "Rahul", "Priya", "Karan",
+        "Neha", "Arjun", "Pooja", "Riya", "Vikas",
+        "Anjali", "Rohan", "Meera", "Sahil", "Kavya",
+        "Aditya", "Nisha", "Yash", "Tanvi", "Harsh",
+        "Isha", "Manav", "Komal", "Deepak", "Sanjana"
+    ],
+
+    "Grade_Group": [
+        "A", "B", "A", "C", "B",
+        "A", "C", "B", "A", "C",
+        "B", "A", "C", "B", "A",
+        "C", "A", "B", "C", "A",
+        "B", "C", "A", "B", "C"
+    ],
+
+    "Score": [
+        85, 72, 90, 65, 78,
+        88, 60, 75, 92, 68,
+        74, 95, 62, 79, 91,
+        66, 89, 77, 64, 93,
+        73, 61, 87, 76, 69
+    ],
+
+    "StudyHrs": [
+        5, 3, 6, 2, 4,
+        5, 2, 3, 6, 2,
+        3, 7, 2, 4, 6,
+        2, 5, 4, 2, 6,
+        3, 2, 5, 4, 3
+    ]
+}
+
+# ── Convert into DataFrame ────────────────────────────────
+
+df = pd.DataFrame(data)
+
+# ── Store Dataset Locally as CSV File ─────────────────────
+
+df.to_csv("data.csv", index=False)
+
+print("Dataset created and stored successfully!")
+
+# ============================================================
+# NOW LOAD THE SAME DATASET
+# ============================================================
+
 df = pd.read_csv("data.csv")
 
-print("=== Dataset Sample ===")
+print("\n=== Dataset Sample ===")
 print(df.head())
 
 print("\n=== Shape of Dataset ===")
@@ -18,38 +67,41 @@ print("\n=== Column Names ===")
 print(df.columns)
 
 # ============================================================
-# Example Assumption:
-# Categorical Column : Grade_Group
-# Numeric Columns    : Score, StudyHrs
+# SUMMARY STATISTICS
 # ============================================================
 
-# ── Summary Statistics of Score grouped by Grade_Group ──────
 print("\n=== Summary Statistics of Score grouped by Grade_Group ===")
 
 grouped = df.groupby("Grade_Group")["Score"].agg(
-    Mean   = "mean",
-    Median = "median",
-    Min    = "min",
-    Max    = "max",
-    Std    = "std"
+    Mean="mean",
+    Median="median",
+    Min="min",
+    Max="max",
+    Std="std"
 ).round(2)
 
 print(grouped)
 
-# ── Summary Statistics of StudyHrs grouped by Grade_Group ───
+# ============================================================
+# STUDY HOURS STATISTICS
+# ============================================================
+
 print("\n=== Summary Statistics of StudyHrs grouped by Grade_Group ===")
 
 grouped2 = df.groupby("Grade_Group")["StudyHrs"].agg(
-    Mean   = "mean",
-    Median = "median",
-    Min    = "min",
-    Max    = "max",
-    Std    = "std"
+    Mean="mean",
+    Median="median",
+    Min="min",
+    Max="max",
+    Std="std"
 ).round(2)
 
 print(grouped2)
 
-# ── Numeric List for each Category ──────────────────────────
+# ============================================================
+# NUMERIC LIST PER CATEGORY
+# ============================================================
+
 print("\n=== Numeric List per Grade Group (Score) ===")
 
 grade_list = {
@@ -60,7 +112,6 @@ grade_list = {
 for grade, scores in grade_list.items():
     print(f"\nGrade {grade} ({len(scores)} students)")
     print(scores)
-
 # ============================================================
 # DATA SCIENCE PRACTICAL
 # PART 2 : Iris Dataset Statistical Details
