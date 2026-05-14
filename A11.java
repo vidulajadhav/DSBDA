@@ -140,7 +140,8 @@ public class WordCount {
 
 // # STEP 2 — Compile Java file using Hadoop's compiler
 // hadoop com.sun.tools.javac.Main WordCount.java
-
+// if not worked
+// javac -classpath "$(hadoop classpath)" -d . WordCount.java
 // # STEP 3 — Package compiled .class files into a JAR
 // jar cf WordCount.jar WordCount*.class
 
